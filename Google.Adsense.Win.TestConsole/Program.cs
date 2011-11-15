@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 
 using Google.Adsense.Win.Logic;
+using Google.Adsense.Win.Logic.AdSenseApi;
 using Google.Apis.Adsense.v1;
 using Google.Apis.Adsense.v1.Data;
 using Google.Apis.Authentication.OAuth2;
@@ -38,12 +39,19 @@ namespace Google.Adsense.Win.TestConsole
             IAuthenticatorProvider authProvider = new AdSenseAuthenticatorProvider(getConfirmationCodeFromUser);
 
             var service = new AdsenseService(authProvider.GetAuthenticator());
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 1; i++)
             {
-                AdClients clients = service.Adclients.List().Fetch();
-                foreach (var currClient in clients.Items)
+                AdSenseClient client = new AdSenseClient(service, System.Globalization.CultureInfo.CurrentUICulture);
+                IList<string> adClients = client.FetchAdClients();
+                foreach (var currClient in adClients)
                 {
-                    Console.WriteLine(string.Format("{0}\t{1}\t{2}", currClient.Id, currClient.ProductCode, currClient.SupportsReporting));
+                    Console.WriteLine(currClient);
+                }
+
+                ChannelSummary summary = client.FetchCustomChannels();
+                foreach (var channel in summary.Channels)
+                {
+                    Console.WriteLine("{0}\t{1}\t{2}", channel.Id, channel.Name, channel.Earnings);
                 }
                 Thread.Sleep(1000);
             }

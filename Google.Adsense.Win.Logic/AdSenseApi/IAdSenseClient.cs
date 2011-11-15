@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Google.Adsense.Win.Logic.AdSenseApi
 {
-    interface IAdSenseClient
+    public interface IAdSenseClient
     {
       IList<string> FetchAdClients();
 
@@ -20,7 +20,6 @@ namespace Google.Adsense.Win.Logic.AdSenseApi
       AggregateRevenueSummary FetchLifetimeRevenue();
     }
 
-    class OverviewReport { }
-    class ChannelSummary { }
-    class AggregateRevenueSummary { }
+    public class OverviewReport { }
+    public class AggregateRevenueSummary { }
 }
