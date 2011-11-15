@@ -3,25 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using NodaTime;
-
 namespace Google.Adsense.Win.Logic.AdSenseApi
 {
     class ReportDates
     {
-        static readonly DateTimeZone GoogleTimeZone = DateTimeZone.ForId("America/Los_Angeles");
-
-        public static ZonedDateTime Today
+        public static DateTime Today
         {
             get
             {
-                return new ZonedDateTime(new Instant(DateTime.UtcNow.Ticks), GoogleTimeZone);
+                return DateTime.Today;
             }
         }
 
-        public static string ToReportingString(ZonedDateTime date)
+        public static DateTime Yesterday
         {
-            return string.Format("{0:D4}-{1:D2}-{2:D2}", date.Year, date.MonthOfYear, date.DayOfMonth);
+            get
+            {
+                DateTime yesterday = DateTime.Today.AddDays(-1);
+                
+                return yesterday;
+            }
+        }
+
+        public static DateTime FirstOfLastMonth
+        {
+            get
+            {
+                DateTime today = Today;
+                int day = 1;
+                int month = today.Month - 1;
+                int year = today.Year;
+                if (month < 1)
+                {
+                    month = 1;
+                    year--;
+                }
+                return new DateTime(year, month, day);
+            }
+        }
+
+        public static string ToReportingString(DateTime date)
+        {
+            return date.ToString("yyyy-MM-dd");
+            //return string.Format("{0:D4}-{1:D2}-{2:D2}", date.Year, date.Month, date.Day);
         }
     }
 }

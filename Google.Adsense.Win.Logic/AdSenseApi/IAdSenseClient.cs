@@ -19,7 +19,6 @@ namespace Google.Adsense.Win.Logic.AdSenseApi
 
       AggregateRevenueSummary FetchLifetimeRevenue();
     }
-
-    public class OverviewReport { }
+    
     public class AggregateRevenueSummary { }
 }

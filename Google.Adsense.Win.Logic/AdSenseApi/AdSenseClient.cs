@@ -8,8 +8,6 @@ using Google.Apis.Adsense.v1;
 using Google.Apis.Adsense.v1.Data;
 using Google.Apis.Util;
 
-using NodaTime;
-
 namespace Google.Adsense.Win.Logic.AdSenseApi
 {
     public class AdSenseClient : IAdSenseClient
@@ -35,16 +33,34 @@ namespace Google.Adsense.Win.Logic.AdSenseApi
 
         public OverviewReport FetchOverview()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            
+            // Calculate some important values of the date ranges we're working with.
+            DateTime today = ReportDates.Today;
+            DateTime yesterday = ReportDates.Yesterday;
+            DateTime firstOfLastMonth = ReportDates.FirstOfLastMonth;
+
+            // Report on the whole of the current month and the whole of the previous month
+            // by setting the start date to the first of the previous month.
+            string startDate = ReportDates.ToReportingString(firstOfLastMonth);
+            string endDate = ReportDates.ToReportingString(today);
+            var report = service.Reports.Generate(startDate, endDate);
+            report.Locale = locale.TwoLetterISOLanguageName;
+            report.Dimension = new Repeatable<string>(OverviewReport.OverviewDimensions);
+            report.Metric = new Repeatable<string>(OverviewReport.OverviewMetrics);
+            report.Sort = "+DATE";
+            var result = report.Fetch();
+            
+            return new OverviewReport(locale, today, yesterday, firstOfLastMonth, result);
         }
 
         public ChannelSummary FetchCustomChannels()
         {
-            ZonedDateTime today = ReportDates.Today;
-            ZonedDateTime sevenDayStart = today - new Duration(NodaConstants.TicksPerStandardDay * 6);
+            DateTime today = ReportDates.Today;
+            DateTime sevenDayStart = today.AddDays(-6);
 
-            String startDate = ReportDates.ToReportingString(sevenDayStart);
-            String endDate = ReportDates.ToReportingString(today);
+            string startDate = ReportDates.ToReportingString(sevenDayStart);
+            string endDate = ReportDates.ToReportingString(today);
             var report = service.Reports.Generate(startDate, endDate);
             report.Locale = locale.TwoLetterISOLanguageName;
             report.Dimension = new Repeatable<string>(ChannelSummary.CustomeChannelDimensions);
@@ -55,6 +71,22 @@ namespace Google.Adsense.Win.Logic.AdSenseApi
             return new ChannelSummary(locale, 7, result);
         }
 
+        public ChannelSummary FetchUrlChannels()
+        {
+            DateTime today = ReportDates.Today;
+            DateTime sevenDayStart = today.AddDays(-6);
+
+            string startDate = ReportDates.ToReportingString(sevenDayStart);
+            string endDate = ReportDates.ToReportingString(today);
+            var report = service.Reports.Generate(startDate, endDate);
+            report.Locale = locale.TwoLetterISOLanguageName;
+            report.Dimension = new Repeatable<string>(ChannelSummary.UrlChannelDimensions);
+            report.Metric = new Repeatable<string>(ChannelSummary.UrlChannelMetrics);
+            report.Sort = "-EARNINGS";
+            report.MaxResults = 10;
+            var result = report.Fetch();
+            return new ChannelSummary(locale, 7, result);
+        }
 
         public AggregateRevenueSummary FetchYtdRevenue()
         {
@@ -66,9 +98,5 @@ namespace Google.Adsense.Win.Logic.AdSenseApi
             throw new NotImplementedException();
         }
 
-        public ChannelSummary FetchUrlChannels()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

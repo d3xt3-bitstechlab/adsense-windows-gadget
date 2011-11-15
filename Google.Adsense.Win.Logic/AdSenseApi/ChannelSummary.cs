@@ -10,11 +10,16 @@ namespace Google.Adsense.Win.Logic.AdSenseApi
 {
     public class ChannelSummary
     {
+        public static readonly IList<String> UrlChannelDimensions =
+          new List<string> { "URL_CHANNEL_ID", "URL_CHANNEL_NAME" }.AsReadOnly();
+        public static readonly IList<String> UrlChannelMetrics =
+          new List<string> { "EARNINGS" }.AsReadOnly();
+
         public static readonly IList<string> CustomeChannelDimensions =
             new List<string> { "CUSTOM_CHANNEL_ID", "CUSTOM_CHANNEL_NAME" }.AsReadOnly();
-        public static readonly IList<string> CustomerChannelMetrics = 
+        public static readonly IList<string> CustomerChannelMetrics =
             new List<string> { "EARNINGS" }.AsReadOnly();
-        
+
         private readonly CultureInfo locale;
         private readonly int days;
         private readonly IList<ChannelReportResult> channels;
@@ -47,7 +52,8 @@ namespace Google.Adsense.Win.Logic.AdSenseApi
             public string Name { get; private set; }
             public double? Earnings { get; private set; }
 
-            public ChannelReportResult(string id, string name, string earnings): this()
+            public ChannelReportResult(string id, string name, string earnings)
+                : this()
             {
                 this.Id = id;
                 this.Name = name;

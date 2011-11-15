@@ -48,11 +48,34 @@ namespace Google.Adsense.Win.TestConsole
                     Console.WriteLine(currClient);
                 }
 
-                ChannelSummary summary = client.FetchCustomChannels();
-                foreach (var channel in summary.Channels)
+                Console.WriteLine("Custom Channels:");
+                ChannelSummary customChannel = client.FetchCustomChannels();
+                Console.WriteLine("Reporting Currency:" + customChannel.Currency);
+                
+                foreach (var channel in customChannel.Channels)
                 {
                     Console.WriteLine("{0}\t{1}\t{2}", channel.Id, channel.Name, channel.Earnings);
                 }
+
+                Console.WriteLine("Url Channels:");
+                ChannelSummary urlChannel = client.FetchUrlChannels();
+                Console.WriteLine("Reporting Currency:" + customChannel.Currency);
+                foreach (var channel in urlChannel.Channels)
+                {
+                    Console.WriteLine("{0}\t{1}\t{2}", channel.Id, channel.Name, channel.Earnings);
+                }
+
+                Console.WriteLine("Overview:");
+                OverviewReport overview = client.FetchOverview();
+                Console.WriteLine("Date\t\tGBP\tView\tClicks\tCTR\tCPC\tRPM");
+                foreach (var dayResult in overview.Results)
+                {
+                    var result = dayResult.Value;
+                    Console.WriteLine("{0:yyyy-MM-dd}\t{1:C}\t{2}\t{3}\t{4:P2}\t{5:C}\t{6:F4}",
+                        result.Date, result.Earnings, result.PageViews, result.Clicks, result.ClickThroughRate,
+                        result.CostPerClick, result.RevenuePerMilli);
+                }
+
                 Thread.Sleep(1000);
             }
         }

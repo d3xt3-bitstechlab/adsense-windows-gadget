@@ -59,6 +59,7 @@
     <Compile Include="AdSenseApi\AdSenseClient.cs" />
     <Compile Include="AdSenseApi\ChannelSummary.cs" />
     <Compile Include="AdSenseApi\IAdSenseClient.cs" />
+    <Compile Include="AdSenseApi\OverviewReport.cs" />
     <Compile Include="AdSenseApi\ReportDates.cs" />
     <Compile Include="AdSenseAuthenticatorProvider.cs" />
     <Compile Include="IAuthenticatorProvider.cs" />
