@@ -32,7 +32,7 @@ namespace Google.Adsense.Win.Gadget
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Grid
     {
         public MainWindow()
         {

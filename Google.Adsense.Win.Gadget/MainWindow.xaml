@@ -1,8 +1,7 @@
-﻿<Window x:Class="Google.Adsense.Win.Gadget.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
-</Window>
+﻿<Grid x:Class="Google.Adsense.Win.Gadget.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Label Height="28" HorizontalAlignment="Left" Margin="10,10,10,10" Name="label1" VerticalAlignment="Top" >
+        Fish are happy things
+    </Label>
+</Grid>

@@ -47,5 +47,14 @@ namespace Google.Adsense.Win.Logic.AdSenseApi
             return date.ToString("yyyy-MM-dd");
             //return string.Format("{0:D4}-{1:D2}-{2:D2}", date.Year, date.Month, date.Day);
         }
+
+        public static DateTime FirstOfThisMonth
+        {
+            get
+            {
+                DateTime today = Today;
+                return new DateTime(today.Year, today.Month, 1);
+            }
+        }
     }
 }

@@ -39,6 +39,7 @@ namespace Google.Adsense.Win.Logic.AdSenseApi
             DateTime today = ReportDates.Today;
             DateTime yesterday = ReportDates.Yesterday;
             DateTime firstOfLastMonth = ReportDates.FirstOfLastMonth;
+            DateTime firstOfThisMonth = ReportDates.FirstOfThisMonth;
 
             // Report on the whole of the current month and the whole of the previous month
             // by setting the start date to the first of the previous month.
@@ -51,7 +52,7 @@ namespace Google.Adsense.Win.Logic.AdSenseApi
             report.Sort = "+DATE";
             var result = report.Fetch();
             
-            return new OverviewReport(locale, today, yesterday, firstOfLastMonth, result);
+            return new OverviewReport(locale, today, yesterday, firstOfLastMonth, firstOfThisMonth, result);
         }
 
         public ChannelSummary FetchCustomChannels()

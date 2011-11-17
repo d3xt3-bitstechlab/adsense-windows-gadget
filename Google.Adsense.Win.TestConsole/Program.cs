@@ -67,14 +67,16 @@ namespace Google.Adsense.Win.TestConsole
 
                 Console.WriteLine("Overview:");
                 OverviewReport overview = client.FetchOverview();
-                Console.WriteLine("Date\t\tGBP\tView\tClicks\tCTR\tCPC\tRPM");
+                Console.WriteLine("Date\t\tGBP\tView\tClicks\tCTR\tCPC\tRPM\tAgg\tDays");
                 foreach (var dayResult in overview.Results)
                 {
                     var result = dayResult.Value;
-                    Console.WriteLine("{0:yyyy-MM-dd}\t{1:C}\t{2}\t{3}\t{4:P2}\t{5:C}\t{6:F4}",
-                        result.Date, result.Earnings, result.PageViews, result.Clicks, result.ClickThroughRate,
-                        result.CostPerClick, result.RevenuePerMilli);
+                    Console.WriteLine(result);
                 }
+                Console.WriteLine("Last Month:");
+                Console.WriteLine(overview.LastMonth);
+                Console.WriteLine("Month To Date:");
+                Console.WriteLine(overview.MonthToDate);
 
                 Thread.Sleep(1000);
             }
