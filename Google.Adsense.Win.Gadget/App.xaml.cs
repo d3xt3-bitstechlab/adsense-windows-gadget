@@ -27,6 +27,7 @@ using Google.Apis.Adsense.v1;
 
 using DotNetOpenAuth.OAuth2;
 using Google.Adsense.Win.Logic.AdSenseApi;
+using System.Windows.Media;
 
 namespace Google.Adsense.Win.Gadget
 {
@@ -47,6 +48,8 @@ namespace Google.Adsense.Win.Gadget
             MainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             MainWindow.Content = new MainWindow();
             MainWindow.SizeToContent = SizeToContent.WidthAndHeight;
+            MainWindow.BorderBrush = new SolidColorBrush(Color.FromRgb(0x51,0x84,0xD2));
+            MainWindow.BorderThickness = new Thickness(5);
             MainWindow.MouseLeftButtonDown += delegate
              {
                  MainWindow.DragMove();

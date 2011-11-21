@@ -4,7 +4,7 @@
         xmlns:views="clr-namespace:Google.Adsense.Win.Gadget"
         xmlns:viewmodel="clr-namespace:Google.Adsense.Win.Gadget.ViewModel"
         xmlns:commands="clr-namespace:Google.Adsense.Win.Gadget.Commands"
-        Background="#5184D2"
+        Background="#C0FFFFFF"
         >
     <DockPanel.Resources>
         <ObjectDataProvider x:Key="report" ObjectType="{x:Type viewmodel:OverviewSummaryViewModel}" MethodName="GetInstance" />
@@ -16,8 +16,8 @@
         <CommandBinding Command="{x:Static commands:GadgetCommands.Refresh}" Executed="RefreshExecuted" CanExecute="CanRefresh" />
     </DockPanel.CommandBindings>
     <DockPanel Name="status" DockPanel.Dock="Bottom">
-        <Button Content="Refresh" DockPanel.Dock="Left"  Command="{x:Static commands:GadgetCommands.Refresh}" />
+        <Button Content="Refresh" DockPanel.Dock="Left"  Command="{x:Static commands:GadgetCommands.Refresh}" Margin="5 0 10 5"/>
         <TextBlock DockPanel.Dock="Right" Text="{Binding Path=DateReportFetched,StringFormat=Last Refeshed {0:hh:mm:ss}}"/>
     </DockPanel>
-    <views:OverviewReportView Margin="5" Background="White" />
+    <views:OverviewReportView Margin="5"/>
 </DockPanel>
