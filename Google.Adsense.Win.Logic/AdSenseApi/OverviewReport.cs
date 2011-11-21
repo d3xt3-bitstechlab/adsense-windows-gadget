@@ -35,10 +35,14 @@ namespace Google.Adsense.Win.Logic.AdSenseApi
         private readonly IDictionary<DateTime, OverviewReportResult> results;
         private readonly OverviewReportResult monthToDate;
         private readonly OverviewReportResult lastMonth;
+        private readonly OverviewReportResult resultToday;
+        private readonly OverviewReportResult resultYesterday;
         
         public System.Globalization.CultureInfo Locale { get { return locale; } }
         public string Currency { get { return currency; } }
         public IDictionary<DateTime, OverviewReportResult> Results { get { return results; } }
+        public OverviewReportResult Today { get { return resultToday; } }
+        public OverviewReportResult Yesterday { get { return resultYesterday; } }
         public OverviewReportResult MonthToDate { get { return monthToDate; } }
         public OverviewReportResult LastMonth { get { return lastMonth; } }
 
@@ -60,7 +64,12 @@ namespace Google.Adsense.Win.Logic.AdSenseApi
             this.lastMonth = (from r in results.Values
                                 where r.Date.CompareTo(firstOfThisMonth) < 0
                                 select r).Aggregate(OverviewReportResult.AggregateSeed(), OverviewReportResult.Aggregate);
-
+            this.resultToday = (from r in results.Values
+                              where r.Date.CompareTo(today) == 0
+                              select r).Aggregate(OverviewReportResult.AggregateSeed(), OverviewReportResult.Aggregate);
+            this.resultYesterday = (from r in results.Values
+                              where r.Date.CompareTo(yesterday) == 0
+                              select r).Aggregate(OverviewReportResult.AggregateSeed(), OverviewReportResult.Aggregate);
         }
 
         public struct OverviewReportResult
