@@ -19,5 +19,5 @@
         <Button Content="Refresh" DockPanel.Dock="Left"  Command="{x:Static commands:GadgetCommands.Refresh}" Margin="5 0 10 5"/>
         <TextBlock DockPanel.Dock="Right" Text="{Binding Path=DateReportFetched,StringFormat=Last Refeshed {0:hh:mm:ss}}"/>
     </DockPanel>
-    <views:OverviewReportView Margin="5"/>
+    <views:TabbedView/>
 </DockPanel>
