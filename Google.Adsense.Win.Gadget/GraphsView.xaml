@@ -3,11 +3,77 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:viewmodel="clr-namespace:Google.Adsense.Win.Gadget.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBlock>
-         The Future home of GraphsView.
-        </TextBlock>
-    </Grid>
+             d:DesignHeight="900" d:DesignWidth="700">
+    <StackPanel>
+        <StackPanel.Resources>
+            <ObjectDataProvider x:Key="report" ObjectType="{x:Type viewmodel:OverviewSummaryViewModel}" MethodName="GetInstance" />
+        </StackPanel.Resources>
+        <charting:Chart             
+            HorizontalAlignment="Left" 
+            Margin="0"
+            VerticalAlignment="Top" 
+            Height="250" Width="600" 
+           >
+            <charting:Chart.Title>Estimated Revenue</charting:Chart.Title>
+            <!--
+            <charting:Chart.Axes>
+                <charting:LinearAxis Orientation="X"></charting:LinearAxis>
+                <charting:LinearAxis Orientation="Y"></charting:LinearAxis>
+            </charting:Chart.Axes>
+            -->
+
+            <charting:LineSeries
+                Title="Revenue"
+                DependentValueBinding="{Binding Path=Earnings}"                 
+                IndependentValueBinding="{Binding Path=Date}" 
+                ItemsSource="{Binding Source={StaticResource report}, Path=Report.Results.Values}">
+            </charting:LineSeries>
+        </charting:Chart>
+        
+        <charting:Chart             
+            HorizontalAlignment="Left" 
+            Margin="0" 
+            VerticalAlignment="Top" 
+            Height="250" Width="600"
+           >
+            <charting:Chart.Title>Cost Per Click</charting:Chart.Title>
+            <!--
+            <charting:Chart.Axes>
+                <charting:LinearAxis Orientation="X"></charting:LinearAxis>
+                <charting:LinearAxis Orientation="Y"></charting:LinearAxis>
+            </charting:Chart.Axes>
+            -->
+
+            <charting:LineSeries
+                Title="Cost Per Click"
+                DependentValueBinding="{Binding Path=CostPerClick}"                 
+                IndependentValueBinding="{Binding Path=Date}" 
+                ItemsSource="{Binding Source={StaticResource report}, Path=Report.Results.Values}">
+            </charting:LineSeries>
+        </charting:Chart>
+        <charting:Chart             
+            HorizontalAlignment="Left" 
+            Margin="0" 
+            VerticalAlignment="Top" 
+            Height="250" Width="600"
+           >
+            <charting:Chart.Title>Click Through Rate</charting:Chart.Title>
+            <!--
+            <charting:Chart.Axes>
+                <charting:LinearAxis Orientation="X"></charting:LinearAxis>
+                <charting:LinearAxis Orientation="Y"></charting:LinearAxis>
+            </charting:Chart.Axes>
+            -->
+
+            <charting:LineSeries
+                Title="Click Through Rate"
+                DependentValueBinding="{Binding Path=ClickThroughRate}"                 
+                IndependentValueBinding="{Binding Path=Date}" 
+                ItemsSource="{Binding Source={StaticResource report}, Path=Report.Results.Values}">
+            </charting:LineSeries>
+        </charting:Chart>
+    </StackPanel>
 </UserControl>

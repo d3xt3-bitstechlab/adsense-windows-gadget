@@ -37,6 +37,17 @@ namespace Google.Adsense.Win.Gadget.ViewModel
         {
             DateReportFetched = new DateTime(1970, 1, 1);
             Report = new AdSenseZeroClient().FetchOverview();
+            this.PropertyChanged += new PropertyChangedEventHandler(OverviewSummaryViewModel_PropertyChanged);
+        }
+
+        void OverviewSummaryViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "CurrentlyRefreshing":
+                    OnPropertyChanged("CanRefreshReport");
+                    break;
+            }
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -87,7 +98,6 @@ namespace Google.Adsense.Win.Gadget.ViewModel
             {
                 this.currentlyRefreshing = value;
                 OnPropertyChanged("CurrentlyRefreshing");
-                OnPropertyChanged("CanRefreshReport");
             }
         }
 
@@ -110,6 +120,7 @@ namespace Google.Adsense.Win.Gadget.ViewModel
             {
                 this.report = value;
                 OnPropertyChanged("Report");
+
             }
         }
         #endregion
