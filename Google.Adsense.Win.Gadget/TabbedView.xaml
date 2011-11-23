@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     <TabControl Background="Transparent">
-        <TabItem Header="OverView">
+        <TabItem Header="OverView" >
             <views:OverviewReportView Margin="5"/>
         </TabItem>
         <TabItem Header="Graphs">

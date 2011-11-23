@@ -11,20 +11,8 @@
         <StackPanel.Resources>
             <ObjectDataProvider x:Key="report" ObjectType="{x:Type viewmodel:OverviewSummaryViewModel}" MethodName="GetInstance" />
         </StackPanel.Resources>
-        <charting:Chart             
-            HorizontalAlignment="Left" 
-            Margin="0"
-            VerticalAlignment="Top" 
-            Height="250" Width="600" 
-           >
+        <charting:Chart Style="{StaticResource StdGraph}">
             <charting:Chart.Title>Estimated Revenue</charting:Chart.Title>
-            <!--
-            <charting:Chart.Axes>
-                <charting:LinearAxis Orientation="X"></charting:LinearAxis>
-                <charting:LinearAxis Orientation="Y"></charting:LinearAxis>
-            </charting:Chart.Axes>
-            -->
-
             <charting:LineSeries
                 Title="Revenue"
                 DependentValueBinding="{Binding Path=Earnings}"                 
@@ -32,21 +20,9 @@
                 ItemsSource="{Binding Source={StaticResource report}, Path=Report.Results.Values}">
             </charting:LineSeries>
         </charting:Chart>
-        
-        <charting:Chart             
-            HorizontalAlignment="Left" 
-            Margin="0" 
-            VerticalAlignment="Top" 
-            Height="250" Width="600"
-           >
-            <charting:Chart.Title>Cost Per Click</charting:Chart.Title>
-            <!--
-            <charting:Chart.Axes>
-                <charting:LinearAxis Orientation="X"></charting:LinearAxis>
-                <charting:LinearAxis Orientation="Y"></charting:LinearAxis>
-            </charting:Chart.Axes>
-            -->
 
+        <charting:Chart Style="{StaticResource StdGraph}">
+            <charting:Chart.Title>Cost Per Click</charting:Chart.Title>
             <charting:LineSeries
                 Title="Cost Per Click"
                 DependentValueBinding="{Binding Path=CostPerClick}"                 
@@ -54,12 +30,7 @@
                 ItemsSource="{Binding Source={StaticResource report}, Path=Report.Results.Values}">
             </charting:LineSeries>
         </charting:Chart>
-        <charting:Chart             
-            HorizontalAlignment="Left" 
-            Margin="0" 
-            VerticalAlignment="Top" 
-            Height="250" Width="600"
-           >
+        <charting:Chart Style="{StaticResource StdGraph}">
             <charting:Chart.Title>Click Through Rate</charting:Chart.Title>
             <!--
             <charting:Chart.Axes>
