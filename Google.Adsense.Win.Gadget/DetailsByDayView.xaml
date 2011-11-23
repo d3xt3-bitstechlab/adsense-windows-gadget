@@ -3,12 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewmodel="clr-namespace:Google.Adsense.Win.Gadget.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="500">
     <Grid>
-
-        <TextBlock>
-         The Future home of DetailsByDay.
-        </TextBlock>
+        <Grid.Resources>
+            <ObjectDataProvider x:Key="report" ObjectType="{x:Type viewmodel:OverviewSummaryViewModel}" MethodName="GetInstance" />
+        </Grid.Resources>
+        <ListView Name="details" ItemsSource="{Binding Source={StaticResource report}, Path=Report.Results.Values}" Height="300" Width="500">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=Date, StringFormat={}{0:dd MMM}}"  Width="60"/>
+                    <GridViewColumn Header="CTR %" DisplayMemberBinding="{Binding Path=ClickThroughRate, StringFormat={}{0:P}}" />
+                    <GridViewColumn Header="RPM" DisplayMemberBinding="{Binding Path=RevenuePerMilli, StringFormat={}{0:C}}" />
+                    <GridViewColumn Header="Est. Earnings" DisplayMemberBinding="{Binding Path=Earnings, StringFormat={}{0:C}}" />
+                    <GridViewColumn Header="Views" DisplayMemberBinding="{Binding Path=PageViews}" />
+                    <GridViewColumn Header="Clicks" DisplayMemberBinding="{Binding Path=Clicks}" />
+                    <GridViewColumn Header="CPC" DisplayMemberBinding="{Binding Path=CostPerClick, StringFormat={}{0:C}}" />
+                </GridView>
+            </ListView.View>
+        </ListView>        
     </Grid>
 </UserControl>

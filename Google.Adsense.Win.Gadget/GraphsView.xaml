@@ -6,45 +6,64 @@
              xmlns:charting="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
              xmlns:viewmodel="clr-namespace:Google.Adsense.Win.Gadget.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="900" d:DesignWidth="700">
-    <StackPanel>
-        <StackPanel.Resources>
-            <ObjectDataProvider x:Key="report" ObjectType="{x:Type viewmodel:OverviewSummaryViewModel}" MethodName="GetInstance" />
-        </StackPanel.Resources>
-        <charting:Chart Style="{StaticResource StdGraph}">
-            <charting:Chart.Title>Estimated Revenue</charting:Chart.Title>
-            <charting:LineSeries
-                Title="Revenue"
-                DependentValueBinding="{Binding Path=Earnings}"                 
-                IndependentValueBinding="{Binding Path=Date}" 
-                ItemsSource="{Binding Source={StaticResource report}, Path=Report.Results.Values}">
-            </charting:LineSeries>
-        </charting:Chart>
+             d:DesignHeight="900" d:DesignWidth="640">
+    <ScrollViewer Width="650" Height="750" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel>
+            <StackPanel.Resources>
+                <ObjectDataProvider x:Key="report" ObjectType="{x:Type viewmodel:OverviewSummaryViewModel}" MethodName="GetInstance" />
+            </StackPanel.Resources>
+            <charting:Chart Style="{StaticResource StdGraph}">
+                <charting:Chart.Title>Estimated Revenue</charting:Chart.Title>
+                <charting:LineSeries
+                    Title="Revenue"
+                    DependentValueBinding="{Binding Path=Earnings}"                 
+                    IndependentValueBinding="{Binding Path=Date}" 
+                    ItemsSource="{Binding Source={StaticResource report}, Path=Report.Results.Values}">
+                </charting:LineSeries>
+            </charting:Chart>
 
-        <charting:Chart Style="{StaticResource StdGraph}">
-            <charting:Chart.Title>Cost Per Click</charting:Chart.Title>
-            <charting:LineSeries
-                Title="Cost Per Click"
-                DependentValueBinding="{Binding Path=CostPerClick}"                 
+            <charting:Chart Style="{StaticResource StdGraph}">
+                <charting:Chart.Title>Cost Per Click</charting:Chart.Title>
+                <charting:LineSeries
+                    Title="Cost Per Click"
+                    DependentValueBinding="{Binding Path=CostPerClick}"                 
+                    IndependentValueBinding="{Binding Path=Date}" 
+                    ItemsSource="{Binding Source={StaticResource report}, Path=Report.Results.Values}">
+                </charting:LineSeries>
+            </charting:Chart>
+            <charting:Chart Style="{StaticResource StdGraph}">
+                <charting:Chart.Title>Click Through Rate</charting:Chart.Title>
+                <charting:LineSeries
+                    Title="Click Through Rate"
+                    DependentValueBinding="{Binding Path=ClickThroughRate}"                 
+                    IndependentValueBinding="{Binding Path=Date}" 
+                    ItemsSource="{Binding Source={StaticResource report}, Path=Report.Results.Values}">
+                </charting:LineSeries>
+            </charting:Chart>
+            <charting:Chart Style="{StaticResource StdGraph}" Title="Revenue Per Milli">
+                <charting:LineSeries
+                Title="Revenue Per Milli"
+                DependentValueBinding="{Binding Path=RevenuePerMilli}"                 
                 IndependentValueBinding="{Binding Path=Date}" 
                 ItemsSource="{Binding Source={StaticResource report}, Path=Report.Results.Values}">
-            </charting:LineSeries>
-        </charting:Chart>
-        <charting:Chart Style="{StaticResource StdGraph}">
-            <charting:Chart.Title>Click Through Rate</charting:Chart.Title>
-            <!--
-            <charting:Chart.Axes>
-                <charting:LinearAxis Orientation="X"></charting:LinearAxis>
-                <charting:LinearAxis Orientation="Y"></charting:LinearAxis>
-            </charting:Chart.Axes>
-            -->
-
-            <charting:LineSeries
-                Title="Click Through Rate"
-                DependentValueBinding="{Binding Path=ClickThroughRate}"                 
+                </charting:LineSeries>
+            </charting:Chart>
+            <charting:Chart Style="{StaticResource StdGraph}" Title="Page Views">
+                <charting:LineSeries
+                Title="Page Views"
+                DependentValueBinding="{Binding Path=PageViews}"                 
                 IndependentValueBinding="{Binding Path=Date}" 
                 ItemsSource="{Binding Source={StaticResource report}, Path=Report.Results.Values}">
-            </charting:LineSeries>
-        </charting:Chart>
-    </StackPanel>
+                </charting:LineSeries>
+            </charting:Chart>
+            <charting:Chart Style="{StaticResource StdGraph}" Title="Clicks">
+                <charting:LineSeries
+                Title="Clicks"
+                DependentValueBinding="{Binding Path=Clicks}"                 
+                IndependentValueBinding="{Binding Path=Date}" 
+                ItemsSource="{Binding Source={StaticResource report}, Path=Report.Results.Values}">
+                </charting:LineSeries>
+            </charting:Chart>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>
