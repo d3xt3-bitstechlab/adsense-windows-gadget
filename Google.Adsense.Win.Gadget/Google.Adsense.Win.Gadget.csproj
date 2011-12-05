@@ -87,6 +87,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\GadgetCommands.cs" />
+    <Compile Include="Content.xaml.cs">
+      <DependentUpon>Content.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DetailsByDayView.xaml.cs">
       <DependentUpon>DetailsByDayView.xaml</DependentUpon>
     </Compile>
@@ -100,6 +103,10 @@
       <DependentUpon>TabbedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\OverviewSummaryViewModel.cs" />
+    <Page Include="Content.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DetailsByDayView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
