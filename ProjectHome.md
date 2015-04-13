@@ -1,0 +1,1 @@
+This is a work in progress which I hope will turn into a windows 7 gadget displaying a dashboard of your AdSense(tm) account
